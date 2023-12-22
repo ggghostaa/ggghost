@@ -1,24 +1,35 @@
 import React from 'react';
 import './App.css';
+import Button from '@mui/material/Button';
+import {message} from "./components/message";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={""} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+          <div>
+              <Button
+                  onClick={()=>{message.success("this a message success", 6000)}}
+              >
+                  success
+              </Button>
+              <Button
+                  onClick={()=>{message.error("this a message error", 6000)}}
+              >
+                  error
+              </Button>
+              <Button
+                  onClick={()=>{message.warning("this a message warning", 6000)}}
+              >
+                  warning
+              </Button>
+              <Button
+                  onClick={()=>{message.info("this a message info", 6000)}}
+              >
+                  info
+              </Button>
+          </div>
+      </div>
   );
 }
 
