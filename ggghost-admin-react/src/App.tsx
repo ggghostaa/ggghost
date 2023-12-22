@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Button from '@mui/material/Button';
-import {message} from "./components/message";
+import {message} from "./components/message/message";
 
 
 function App() {
