@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+//    "baseUrl": "./",
     "paths": {
       "crypto": [
-        "node_modules/crypto-browserify"
+        "node_modules/@types/crypto-js"
       ],
       "stream": [
         "node_modules/stream-browserify"

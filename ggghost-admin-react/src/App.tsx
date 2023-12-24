@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import {message} from "./components/message/message";
 import {AppBar, ButtonGroup} from "@mui/material";
 
+
 // @ts-ignore
 import testImg from './test.png'
 import {LStorage} from "./utils/storage";
-import * as crypto from "crypto";
 
 
 function App() {
@@ -28,9 +28,12 @@ function App() {
               'enableColorOnDark'
               <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button onClick={()=> {
-                      crypto.createHash('md5')
+                      LStorage.set('hi','dd', 5000);
                   }}>set</Button>
-                  <Button>Two</Button>
+                  <Button onClick={()=>{
+                      const a = LStorage.get('hi');
+                      console.log(a);
+                  }}>get</Button>
                   <Button onClick={()=>{
                       LStorage.clear();
                   }}>clear</Button>

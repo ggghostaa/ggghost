@@ -1,7 +1,6 @@
 
-// import CryptoJS from 'crypto-js'
-// import CryptoJS from "crypto-js/x64-core";
-import * as crypto from "crypto";
+// @ts-ignore
+import CryptoJS from 'crypto-js/crypto-js'
 enum StorageType {
     l = "localStorage",
     s = "sessionStorage"
@@ -37,9 +36,7 @@ class GStorage implements IGStorage{
      * @private
      */
     private encrypt(data: string) {
-        // const md5 = crypto.createHash('md5');
-        // return CryptoJS.AES.encrypt(data, SECRET_KEY).toString();
-        return ''
+        return CryptoJS.AES.encrypt(data, SECRET_KEY).toString();
     }
 
     /**
@@ -48,9 +45,8 @@ class GStorage implements IGStorage{
      * @private
      */
     private decrypt(data: string) {
-        // const bytes = CryptoJS.AES.decrypt(data, SECRET_KEY);
-        // return bytes.toString(CryptoJS.enc.Utf8);
-        return '';
+        const bytes = CryptoJS.AES.decrypt(data, SECRET_KEY);
+        return bytes.toString(CryptoJS.enc.Utf8);
     }
 
     private synthesisKey(key: string) {
@@ -61,15 +57,18 @@ class GStorage implements IGStorage{
 
 
     set(key: string, value: any, expires?: boolean | number) {
+        // console.log('ket:' + key)
+        // console.log('value', value);
+        // console.log('expires', expires)
         const storedItem : IStoredItem = {
             value: value,
             expires: false
         };
         if (expires) {//设置超时时间
-            storedItem.expires = expires === true ? 72 * 60 * 60 * 1000 : expires;
+            storedItem.expires = new Date().getTime() + (expires === true ? 72 * 60 * 60 * 1000 : expires);
         }
-        storedItem.expires = new Date().getTime()
         const data = JSON.stringify(storedItem);
+        console.log(data.toString())
         this.storage.setItem(this.synthesisKey(key),
             IS_DEV ? data : this.encrypt(data)
         );
@@ -81,6 +80,7 @@ class GStorage implements IGStorage{
             const storedItem: IStoredItem = IS_DEV ? JSON.parse(data) : JSON.parse(this.decrypt(data));
             const now = new Date().getTime();
             if (storedItem.expires && storedItem.expires < now) {//超时
+                // console.log('超时')
                 return null;
             }
             return storedItem.value;
