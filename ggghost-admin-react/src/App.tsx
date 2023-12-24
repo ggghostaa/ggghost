@@ -1,12 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Button from '@mui/material/Button';
 import {message} from "./components/message/message";
+import {AppBar, ButtonGroup} from "@mui/material";
+
+// @ts-ignore
+import testImg from './test.png'
+import {LStorage} from "./utils/storage";
+import * as crypto from "crypto";
 
 
 function App() {
+    const myStyle = {
+        backgroundImage: "url('"+ testImg + "')",
+        // height: '10vh',
+        width: '100%',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        // opacity: 0.5
+    }
+    useEffect(()=>{
+        console.log(process.env.NODE_ENV)
+    }, [])
   return (
       <div className="App">
+          <AppBar position="static" color="primary" enableColorOnDark style={myStyle}>
+              'enableColorOnDark'
+              <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                  <Button onClick={()=> {
+                      crypto.createHash('md5')
+                  }}>set</Button>
+                  <Button>Two</Button>
+                  <Button onClick={()=>{
+                      LStorage.clear();
+                  }}>clear</Button>
+              </ButtonGroup>
+          </AppBar>
+          <div style={myStyle}></div>
           <div>
               <Button
                   onClick={()=>{message.success("this a message success", 6000)}}
