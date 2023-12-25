@@ -1,3 +1,9 @@
+/*
+ * @Autor: ggghost
+ * @Date: 2023/12/25 12:46:34
+ * @Description: material ui 全局消息组件
+ */
+
 import React, {Fragment, useState} from "react";
 import Snackbar from '@mui/material/Snackbar';
 import {Alert, Stack} from "@mui/material";

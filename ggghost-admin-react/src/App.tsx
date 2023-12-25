@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import {message} from "./components/message/message";
 import {AppBar, ButtonGroup} from "@mui/material";
 
-
 // @ts-ignore
 import testImg from './test.png'
 import {LStorage} from "./utils/storage";
+import {queries} from "@testing-library/react";
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
               'enableColorOnDark'
               <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button onClick={()=> {
-                      LStorage.set('hi','dd', 5000);
+                      LStorage.set('hi','啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊', 5000);
                   }}>set</Button>
                   <Button onClick={()=>{
                       const a = LStorage.get('hi');
@@ -42,7 +42,7 @@ function App() {
           <div style={myStyle}></div>
           <div>
               <Button
-                  onClick={()=>{message.success("this a message success", 6000)}}
+                  onClick={()=>{message.success("this a message success", 6000, 'bottom', 'left')}}
               >
                   success
               </Button>

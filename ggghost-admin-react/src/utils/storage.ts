@@ -1,3 +1,8 @@
+/*
+ * @Autor: ggghost
+ * @Date: 2023/12/25 12:45:31
+ * @Description: storage 工具类
+ */
 
 // @ts-ignore
 import CryptoJS from 'crypto-js/crypto-js'
@@ -57,9 +62,6 @@ class GStorage implements IGStorage{
 
 
     set(key: string, value: any, expires?: boolean | number) {
-        // console.log('ket:' + key)
-        // console.log('value', value);
-        // console.log('expires', expires)
         const storedItem : IStoredItem = {
             value: value,
             expires: false
@@ -68,7 +70,6 @@ class GStorage implements IGStorage{
             storedItem.expires = new Date().getTime() + (expires === true ? 72 * 60 * 60 * 1000 : expires);
         }
         const data = JSON.stringify(storedItem);
-        console.log(data.toString())
         this.storage.setItem(this.synthesisKey(key),
             IS_DEV ? data : this.encrypt(data)
         );
@@ -80,7 +81,7 @@ class GStorage implements IGStorage{
             const storedItem: IStoredItem = IS_DEV ? JSON.parse(data) : JSON.parse(this.decrypt(data));
             const now = new Date().getTime();
             if (storedItem.expires && storedItem.expires < now) {//超时
-                // console.log('超时')
+                this.storage.removeItem(this.synthesisKey(key));
                 return null;
             }
             return storedItem.value;
