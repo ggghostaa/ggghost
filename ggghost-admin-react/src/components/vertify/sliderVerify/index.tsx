@@ -4,7 +4,7 @@
  * @Description: file content
  */
 
-import React, { useEffect, useRef, useState, Fragment } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {Dialog, DialogTitle, paperClasses} from "@mui/material";
 import './index.css'
 
@@ -19,15 +19,13 @@ const SliderVerify: React.FC<IVerifyProps> = (props: IVerifyProps) => {
     }
 
     return (
-        <Fragment>
-            <Dialog open={open} onClose={handle}>
-                <div style={{height: '600px', width: '600px'}}>
+        <Dialog open={open} onClose={handle}>
+            <div style={{height: '600px', width: '600px'}}>
 
-                    <DialogTitle>Set backup account</DialogTitle>
-                    SliderVerify
-                </div>
-            </Dialog>
-        </Fragment>
+                <DialogTitle>Set backup account</DialogTitle>
+                SliderVerify
+            </div>
+        </Dialog>
     )
 }
 
