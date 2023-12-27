@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import Button from '@mui/material/Button';
 import {message} from "./components/message/message";
-import {AppBar, ButtonGroup} from "@mui/material";
+import {AppBar, ButtonGroup } from "@mui/material";
 
 // @ts-ignore
 import testImg from './test.png'
 import {LStorage} from "./utils/storage";
-import {queries} from "@testing-library/react";
+import SliderVerify from "./components/vertify/sliderVerify";
+import {IValidResult, ValidResult} from "./components/vertify/IVerify";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     useEffect(()=>{
         console.log(process.env.NODE_ENV)
     }, [])
+    const [open, setOpen] = useState(false);
   return (
       <div className="App">
           <AppBar position="static" color="primary" enableColorOnDark style={myStyle}>
@@ -61,6 +63,18 @@ function App() {
               >
                   info
               </Button>
+          </div>
+          <div>
+              <Button onClick={()=>{
+                  setOpen(true)
+              }}>
+                  open
+              </Button>
+              <SliderVerify open={open} handClose={(data: IValidResult)=>{
+                  console.log('=========')
+                  setOpen(false)
+                  console.log(data)
+              }}></SliderVerify>
           </div>
       </div>
   );
