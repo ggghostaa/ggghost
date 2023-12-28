@@ -8,7 +8,10 @@ import {AppBar, ButtonGroup } from "@mui/material";
 import testImg from './test.png'
 import {LStorage} from "./utils/storage";
 import SliderVerify from "./components/vertify/sliderVerify";
-import {IValidResult, ValidResult} from "./components/vertify/IVerify";
+import {IValidResult} from "./components/vertify/IVerify";
+import {imgSrcA} from "./components/test/imgSrcA";
+import {imgSrcB} from "./components/test/imgSrcB";
+import Canv from "./components/test/Canv";
 
 
 function App() {
@@ -76,6 +79,7 @@ function App() {
                   console.log(data)
               }}></SliderVerify>
           </div>
+          <Canv></Canv>
       </div>
   );
 }

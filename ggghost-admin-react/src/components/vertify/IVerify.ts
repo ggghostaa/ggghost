@@ -48,10 +48,6 @@ interface IValidResult {
     status: boolean,
     /** 验证id */
     id: string,
-    /** 行为验证轨迹 */
-    imageCaptchaTrack: ImageCaptchaTrack,
-    /** 添加轨迹 */
-    addTrack(x: number, y: number, t: number, type?: string): void;
 }
 
 /**
@@ -69,7 +65,6 @@ type Track = {
 }
 
 class ImageCaptchaTrack implements IImageCaptchaTrack{
-    constructor() {}
 
     type?: string | undefined;
     bgImageWidth?: number | undefined;
@@ -78,9 +73,13 @@ class ImageCaptchaTrack implements IImageCaptchaTrack{
     blockImageHeight?: number | undefined;
     startTime?: Date | undefined;
     endTime?: Date | undefined;
-    trackList?: Track[] | undefined;
-     addTrack(x: number, y: number, t: number, type?: string | undefined): void {
-        if (this.trackList === undefined) {
+    trackList: Track[];
+
+    constructor() {
+        this.trackList = [];
+    }
+    addTrack(x: number, y: number, t: number, type?: string | undefined): void {
+        if (this.trackList) {
             this.trackList = [];
         }
         const trackItem = {x: x, y: y, t: t, type: type
@@ -92,20 +91,8 @@ class ImageCaptchaTrack implements IImageCaptchaTrack{
 }
 
 
- class ValidResult implements IValidResult{
-    status: boolean;
-    id: string;
-    imageCaptchaTrack: ImageCaptchaTrack;
-    constructor(id: string, status: boolean) {
-        this.id = id;
-        this.status = status;
-        this.imageCaptchaTrack = new ImageCaptchaTrack();
-    }
-    addTrack(x: number, y: number, t: number, type?: string | undefined): void {
-        this.imageCaptchaTrack.addTrack(x, y, t, type);
-    }
-}
 
-export {ValidResult};
-export type {IVerifyProps, IValidResult}
+
+export {ImageCaptchaTrack};
+export type {IVerifyProps, IValidResult, IImageCaptchaTrack}
 
